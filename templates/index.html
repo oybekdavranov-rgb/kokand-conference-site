@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kokand University – Digital Technologies Conference</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    body { box-sizing: border-box; }
+    * { font-family: 'Inter', sans-serif; }
+    h1,h2,h3,h4,h5,h6 { font-family: 'Space Grotesk', sans-serif; }
+
+    .glass-card {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .glass-button {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.12);
+      transition: all 0.3s ease;
+    }
+    .glass-button:hover {
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(139,92,246,0.4);
+      box-shadow: 0 0 30px rgba(139,92,246,0.2);
+    }
+    .member-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    .member-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px -12px rgba(139, 92, 246, 0.25);
+      border-color: rgba(139, 92, 246, 0.3);
+    }
+    .member-card .bio-text {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+    .member-card:hover .bio-text {
+      max-height: 100px;
+      opacity: 1;
+      margin-top: 12px;
+    }
+
+    .director-card {
+      background: linear-gradient(135deg, rgba(139,92,246,0.10) 0%, rgba(56,189,248,0.05) 100%);
+      border: 1px solid rgba(139,92,246,0.20);
+    }
+
+    .stars-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      overflow: hidden;
+      background: #08080c;
+    }
+    .star {
+      position: absolute;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.1) 70%);
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    @keyframes fly-through {
+      0% { transform: translateZ(0) translateY(0); opacity: 0; }
+      5% { opacity: 1; }
+      95% { opacity: 1; }
+      100% { transform: translateZ(1000px) translateY(-100vh); opacity: 0; }
+    }
+    .star-small { width: 1px; height: 1px; animation: fly-through 8s linear infinite; }
+    .star-medium{ width: 2px; height: 2px; animation: fly-through 12s linear infinite; }
+    .star-large { width: 3px; height: 3px; animation: fly-through 15s linear infinite; }
+
+    .glow-orb { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.08; }
+    .glow-line { background: linear-gradient(90deg, transparent, rgba(139,92,246,0.5), rgba(56,189,248,0.5), transparent); height: 1px; }
+    .text-gradient {
+      background: linear-gradient(135deg, #fff 0%, rgba(139, 92, 246, 0.8) 50%, rgba(56, 189, 248, 0.8) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    @keyframes float { 0%,100%{transform: translateY(0)} 50%{transform: translateY(-10px)} }
+    .float-animation { animation: float 6s ease-in-out infinite; }
+
+    .contact-link { transition: all 0.2s ease; }
+    .contact-link:hover { color: #8b5cf6; }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0a0a0f; }
+    ::-webkit-scrollbar-thumb { background: rgba(139,92,246,0.3); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(139,92,246,0.5); }
+  </style>
+</head>
+
+<body class="h-full bg-[#08080c] text-white overflow-auto">
+  <div class="stars-bg" id="stars-container"></div>
+
+  <div class="min-h-full relative z-10">
+    <!-- Hero -->
+    <header class="min-h-[90%] flex flex-col justify-center items-center px-6 py-20 relative">
+      <div class="absolute top-0 left-0 w-full glow-line opacity-50"></div>
+
+      <div class="absolute top-20 left-10 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl float-animation"></div>
+      <div class="absolute bottom-20 right-10 w-80 h-80 bg-cyan-500/5 rounded-full blur-3xl float-animation" style="animation-delay: -3s;"></div>
+
+      <div class="text-center max-w-5xl mx-auto relative z-10">
+        <div class="inline-flex items-center gap-2 glass-card px-4 py-2 rounded-full mb-8">
+          <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+          <span class="text-xs md:text-sm text-gray-400 tracking-widest uppercase">Kokand University</span>
+        </div>
+
+        {% set title = (data.site.main_title or "") %}
+        {% set parts = title.split(" ") %}
+        {% set mid = ((parts|length) + 1) // 2 %}
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
+          <span class="text-white">{{ " ".join(parts[:mid]) }}</span><br>
+          <span class="text-gradient">{{ " ".join(parts[mid:]) }}</span>
+        </h1>
+
+        <p class="text-lg md:text-xl lg:text-2xl text-gray-400 font-light mb-12 tracking-wide">
+          {{ data.site.tagline }}
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#program" class="glass-button px-8 py-4 rounded-2xl text-white font-medium flex items-center justify-center gap-3">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+            View Program
+          </a>
+
+          <a href="#contact" class="glass-button px-8 py-4 rounded-2xl text-white font-medium flex items-center justify-center gap-3">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            Contact
+          </a>
+        </div>
+      </div>
+
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2">
+        <div class="w-6 h-10 border border-white/20 rounded-full flex justify-center pt-2">
+          <div class="w-1 h-3 bg-white/40 rounded-full animate-bounce"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Program (placeholder section) -->
+    <section id="program" class="px-6 py-20 max-w-6xl mx-auto">
+      <div class="glass-card rounded-3xl p-8 md:p-12">
+        <h2 class="text-2xl md:text-3xl font-bold mb-3">Program</h2>
+        <p class="text-gray-400">
+          Replace this section with your real agenda / sessions. You can edit content via <code class="text-gray-300">/edit</code> (and add more fields later).
+        </p>
+      </div>
+    </section>
+
+    <!-- Director -->
+    <section class="px-6 py-20 max-w-6xl mx-auto" id="contact">
+      <div class="text-center mb-12">
+        <h2 class="text-sm text-purple-400 uppercase tracking-[0.3em] mb-4">Leadership</h2>
+        <div class="w-20 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent mx-auto"></div>
+      </div>
+
+      <div class="director-card glass-card rounded-3xl p-8 md:p-12 backdrop-blur-xl">
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
+          <div class="relative flex-shrink-0">
+            <div class="w-48 h-48 md:w-64 md:h-64 rounded-3xl bg-gradient-to-br from-purple-500/20 to-cyan-500/20 flex items-center justify-center overflow-hidden">
+              <svg class="w-24 h-24 md:w-32 md:h-32 text-white/20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            </div>
+            <div class="absolute -bottom-2 -right-2 w-16 h-16 bg-gradient-to-br from-purple-500 to-cyan-500 rounded-2xl flex items-center justify-center">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+            </div>
+          </div>
+
+          <div class="flex-1 text-center lg:text-left">
+            <div class="inline-flex items-center gap-2 bg-purple-500/10 px-4 py-1.5 rounded-full mb-4">
+              <span class="text-purple-400 text-sm font-medium">Conference Director</span>
+            </div>
+
+            <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">{{ data.director.name }}</h3>
+            <p class="text-gray-400 text-lg leading-relaxed mb-8 max-w-2xl">{{ data.director.bio }}</p>
+
+            <div class="flex flex-wrap gap-6 justify-center lg:justify-start">
+              <a href="tel:{{ data.director.phone|replace(' ', '') }}" class="contact-link flex items-center gap-2 text-gray-400">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                <span class="text-sm">{{ data.director.phone }}</span>
+              </a>
+
+              <a href="https://t.me/{{ data.director.telegram }}" target="_blank" rel="noopener noreferrer" class="contact-link flex items-center gap-2 text-gray-400">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                <span class="text-sm">@{{ data.director.telegram }}</span>
+              </a>
+
+              <a href="mailto:{{ data.director.email }}" class="contact-link flex items-center gap-2 text-gray-400">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                <span class="text-sm">{{ data.director.email }}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Members -->
+    <section class="px-6 py-20 max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-sm text-cyan-400 uppercase tracking-[0.3em] mb-4">Committee</h2>
+        <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">{{ data.site.members_title }}</h3>
+        <div class="w-32 h-px bg-gradient-to-r from-transparent via-cyan-500 to-transparent mx-auto"></div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for m in data.members %}
+        <article class="member-card glass-card rounded-2xl p-6 cursor-pointer">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-purple-500/20 to-cyan-500/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-8 h-8 text-white/30" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-white">{{ m.name }}</h4>
+              <p class="text-purple-400 text-sm">{{ m.specialty }}</p>
+            </div>
+          </div>
+
+          <div class="bio-text">
+            <p class="text-gray-500 text-sm leading-relaxed">{{ m.bio }}</p>
+          </div>
+
+          <div class="flex flex-wrap gap-3 mt-4 pt-4 border-t border-white/5">
+            <a href="tel:{{ m.phone|replace(' ', '') }}" class="contact-link text-gray-500 text-xs flex items-center gap-1">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+              {{ m.phone }}
+            </a>
+
+            <a href="https://t.me/{{ m.telegram }}" target="_blank" rel="noopener noreferrer" class="contact-link text-gray-500 text-xs flex items-center gap-1">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+              @{{ m.telegram }}
+            </a>
+
+            <a href="mailto:{{ m.email }}" class="contact-link text-gray-500 text-xs flex items-center gap-1">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              Email
+            </a>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="px-6 py-12 border-t border-white/5">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center">
+              <span class="text-white font-bold text-sm">KU</span>
+            </div>
+            <div>
+              <p class="text-white font-medium">Kokand University</p>
+              <p class="text-gray-500 text-sm">Digital Technologies Conference 2025</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-6">
+            <a href="#" class="text-gray-500 hover:text-purple-400 transition-colors text-sm">Privacy Policy</a>
+            <a href="#" class="text-gray-500 hover:text-purple-400 transition-colors text-sm">Terms of Service</a>
+            <a href="#contact" class="text-gray-500 hover:text-purple-400 transition-colors text-sm">Contact</a>
+          </div>
+
+          <p class="text-gray-600 text-sm">© 2025 All rights reserved</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    function initializeStars() {
+      const container = document.getElementById('stars-container');
+      if (!container) return;
+
+      const starCount = 150;
+      const sizes = ['small', 'medium', 'large'];
+
+      for (let i = 0; i < starCount; i++) {
+        const star = document.createElement('div');
+        const size = sizes[Math.floor(Math.random() * sizes.length)];
+
+        star.className = `star star-${size}`;
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDelay = (Math.random() * 20) + 's';
+        star.style.animationDuration = (8 + Math.random() * 10) + 's';
+
+        container.appendChild(star);
+      }
+
+      const glowCount = 3;
+      for (let i = 0; i < glowCount; i++) {
+        const glow = document.createElement('div');
+        glow.className = 'glow-orb';
+        glow.style.width = (200 + i * 100) + 'px';
+        glow.style.height = (200 + i * 100) + 'px';
+        glow.style.left = (Math.random() * 100) + '%';
+        glow.style.top = (Math.random() * 100) + '%';
+        glow.style.background = i % 2 === 0 ? 'rgba(139, 92, 246, 0.3)' : 'rgba(56, 189, 248, 0.2)';
+        glow.style.transform = 'translate(-50%, -50%)';
+        container.appendChild(glow);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeStars);
+    } else {
+      initializeStars();
+    }
+  </script>
+</body>
+</html>

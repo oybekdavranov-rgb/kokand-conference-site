@@ -1,0 +1,136 @@
+{
+  "site": {
+    "main_title": "Kokand University Digital Technologies Department",
+    "members_title": "Our Team"
+  },
+  "director": {
+    "name": "Qodirov Sardorbek Isroiljon o'g'li",
+    "bio": "Head of the Digital Technologies and Mathematics Department. Responsible for training specialists in digital technologies and mathematics, conducting scientific research, and implementing modern technologies.",
+    "phone": "+(998)91 683-42-62",
+    "telegram": "@SARDORIBEK",
+    "email": "info@kokanduni.uz"
+  },
+  "members": [
+    {
+      "name": "Botirov Muzaffar Mansurovich",
+      "specialty": "O'qituvchi",
+      "bio": "",
+      "phone": "+(998)73 545-55-55",
+      "telegram": "",
+      "email": ""
+    },
+    {
+      "name": "To‘ychiboyev Abbosjon Sherali o‘g‘li",
+      "specialty": "O'qitvchi",
+      "bio": "",
+      "phone": "+(998)73 545-55-55",
+      "telegram": "",
+      "email": ""
+    },
+    {
+      "name": "Jumakulov Abdumannon Kodirjonovich",
+      "specialty": "O'qituvchi",
+      "bio": "",
+      "phone": "+(998)97 210-81-20",
+      "telegram": "",
+      "email": ""
+    },
+    {
+      "name": "Rahmonova Nilufar Vaxobjon qizi",
+      "specialty": "O'qituvchi",
+      "bio": "",
+      "phone": "+(998)73 545-55-55",
+      "telegram": "",
+      "email": ""
+    },
+    {
+      "name": "Meliboyev Azizjon Ikromjon o'g'li",
+      "specialty": "O'qituvchi",
+      "bio": "",
+      "phone": "+(998)73 545-55-55",
+      "telegram": "",
+      "email": ""
+    },
+    {
+      "name": "Axmadaliyev Shaxobiddin Sharifovich",
+      "specialty": "O'qituvchi",
+      "bio": "",
+      "phone": "+(998)73 545-55-55",
+      "telegram": "",
+      "email": ""
+    },
+    {
+      "name": "Xaydarov Iqboljon Ilyosjon o'g'li",
+      "specialty": "O'qituvchi",
+      "bio": "",
+      "phone": "+(998)90 255-22-55",
+      "telegram": "",
+      "email": ""
+    },
+    {
+      
+      "name": "Azimova Toyibaxon Elmurodjon qizi",
+      "specialty": "O'qituvchi",
+      "bio": "",
+      "phone": "+(998)90 305-68-22",
+      "telegram": "",
+      "email": ""
+    },
+    {
+      "name": "Sulaymonov Jasurbek Bahromjon o'gli",
+      "specialty": "O'qituvchi",
+      "bio": "",
+      "phone": "+(998)91 670-24-29",
+      "telegram": "",
+      "email": ""
+    },
+    {
+      "name": "Toshtemirov Bahodirjon Hayotjon o'g'li",
+      "specialty": "v.b Dotsent",
+      "bio": "",
+      "phone": "+(998)97 502-59-59",
+      "telegram": "",
+      "email": ""
+    },
+    {
+      "name": "Rahmonov Nodirjon Raxmonjon o'g'li",
+      "specialty": "O'qituvchi",
+      "bio": "",
+      "phone": "+(998)91 150-01-04",
+      "telegram": "",
+      "email": ""
+    },
+    {
+      "name": "Yo'ldashev Axrorjon Egamnazar o'g'li",
+      "specialty": "O'qituvchi",
+      "bio": "",
+      "phone": "+(998)99 990-00-92",
+      "telegram": "",
+      "email": ""
+    },
+    {
+      "name": "Asqarov Elbek Erkinjon o‘g‘li",
+      "specialty": "O'qituvchi",
+      "bio": "",
+      "phone": "+(998)90 855-01-21",
+      "telegram": "",
+      "email": ""
+    },
+    {
+      "name": "Kaxarov Shukrullo Sa'dullo oʻgʻli",
+      "specialty": "Raqamli texnologiyalar va matematika o‘qituvchisi",
+      "bio": "",
+      "phone": "+(998)73 545-55-55",
+      "telegram": "",
+      "email": ""
+    },
+    {
+      "name": "Toxirov Rustam Solijonovich",
+      "specialty": "Katta o'qituvchi",
+      "bio": "",
+      "phone": "+(998)73 545-55-55",
+      "telegram": "",
+      "email": ""
+    }
+  ]
+}
